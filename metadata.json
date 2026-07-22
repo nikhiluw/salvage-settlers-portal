@@ -1,0 +1,6 @@
+{
+  "name": "Real-Time Auction & Analytics Portal",
+  "description": "Multi-device real-time auction bidding system featuring countdown timers, simulated secure checkout, multi-factor authentication, offline capability, push alerts, AI-driven bid insights, and visual spend analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
