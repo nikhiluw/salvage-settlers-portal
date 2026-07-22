@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import fs from "fs";
 import { createServer as createViteServer } from "vite";
 import { spawn } from "child_process";
 
@@ -13,8 +14,21 @@ app.use(express.json({ limit: "10mb" }));
 // Spawn Python SQL Backend Service
 console.log("[PROXY SERVER] Launching python multi-threaded SQLite service...");
 const pythonExecutable = process.env.PYTHON || (process.platform === "win32" ? "python" : "python3");
-const pythonBackend = spawn(pythonExecutable, ["backend.py"], {
+
+console.log(`[PROXY SERVER] Spawning backend using executable: ${pythonExecutable}`);
+
+let backendPath = path.join(__dirname, "backend.py");
+if (!fs.existsSync(backendPath)) {
+  backendPath = path.join(__dirname, "../backend.py");
+}
+console.log(`[PROXY SERVER] Resolved backend script path to: ${backendPath}`);
+
+const pythonBackend = spawn(pythonExecutable, [backendPath], {
   stdio: "inherit"
+});
+
+pythonBackend.on("error", (err) => {
+  console.error(`[PROXY SERVER FATAL] Failed to start Python backend subprocess:`, err);
 });
 
 pythonBackend.on("close", (code) => {
