@@ -6,3 +6,7 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Local Database & Uploads
+vault.db
+uploads/
