@@ -1,0 +1,2 @@
+# This project uses only Python Standard Library modules (http.server, sqlite3, smtplib, etc.).
+# No external pip dependencies are required to run this application backend.
