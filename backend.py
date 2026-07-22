@@ -30,7 +30,7 @@ load_env()
 
 # Database File PATH
 DB_PATH = "vault.db"
-PORT = int(os.environ.get("PORT", 8000))
+PORT = int(os.environ.get("PYTHON_PORT", 8000))
 
 def send_welcome_email(to_email, username, user_type):
     subject = f"Welcome to Salvage Settlers E-Auction Portal - Account Verified ({username})"
