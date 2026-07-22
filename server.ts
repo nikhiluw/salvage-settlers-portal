@@ -5,7 +5,7 @@ import { spawn } from "child_process";
 
 // Initialize express app
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 const PYTHON_PORT = 8000;
 
 app.use(express.json({ limit: "10mb" }));

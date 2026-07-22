@@ -30,7 +30,7 @@ load_env()
 
 # Database File PATH
 DB_PATH = "vault.db"
-PORT = 8000
+PORT = int(os.environ.get("PORT", 8000))
 
 def send_welcome_email(to_email, username, user_type):
     subject = f"Welcome to Salvage Settlers E-Auction Portal - Account Verified ({username})"
@@ -1381,8 +1381,8 @@ def start_server():
     expiry_thread = threading.Thread(target=run_expiry_watcher, daemon=True)
     expiry_thread.start()
 
-    server = ThreadedHTTPServer(("127.0.0.1", PORT), PythonAPIService)
-    print(f"[PYTHON BACKEND] Listening securely on http://127.0.0.1:{PORT}")
+    server = ThreadedHTTPServer(("0.0.0.0", PORT), PythonAPIService)
+    print(f"[PYTHON BACKEND] Listening securely on http://0.0.0.0:{PORT}")
     try:
         server.serve_forever()
     except KeyboardInterrupt:
